@@ -65,8 +65,8 @@
     </style>
 </head>
 <body>
-<h1>Xin chào Boss 💖</h1>
-<p>Chọn khôn ngoan đi nè 🍓</p>
+<h1>Xin chào nàng nha</h1>
+<p>Cho anh xin lỗi nàng nha </p>
 
 <!-- Ảnh nằm trên nút -->
 <img id="mainImg" src="img/anhnen.jpg" alt="Ảnh hồng xinh">
@@ -76,14 +76,14 @@
 <button id="btnDeo" class="btn" onclick="sayNo()">Đéo 😏</button>
 
 <footer>
-    <p>Made with 💗 by Boss</p>
+    <p>Made with 💗 by chàng</p>
 </footer>
 
 <script>
     let noClickCount = 0;
 
     const imgEl = document.getElementById("mainImg");
-
+    const textEl = document.querySelector("p");
     // Danh sách ảnh cho mỗi nút
     const imgDa = [
         "/img/dongy.jpg"
@@ -97,6 +97,19 @@
         "/img/deo5.jpg"
     ];
 
+    // Danh sách câu chữ thay đổi
+    const textDa = [
+        "Hehe yêu nàng nhất , cảm ơn nàng nho 💗 "
+    ];
+
+    const textDeo = [
+        "Thoi mò cho xin lỗi đi mò",
+        "hoiii cho nàng bông hoa cho đỡ giận nè",
+        "Nàng không tha lỗi là a khóc đó",
+        "Anh khóc thiệt ròi nè nàng tha lỗi đi mò",
+        "Nàng không tha lỗi là con gián này thành cục cứt cho nàng coi"
+    ];
+
     let indexDa = 0;
     let indexDeo = 0;
 
@@ -104,6 +117,7 @@
         // đổi ảnh khi bấm nút Dạ
         indexDa = (indexDa + 1) % imgDa.length;
         imgEl.src = imgDa[indexDa];
+        textEl.textContent = textDa[indexDa % textDa.length];
     }
 
     function sayNo() {
@@ -111,6 +125,8 @@
 
         const btnDa = document.getElementById("btnDa");
         const btnDeo = document.getElementById("btnDeo");
+
+        textEl.textContent = textDeo[indexDeo % textDeo.length];
 
         // đổi ảnh khi bấm nút Đéo
         indexDeo = (indexDeo + 1) % imgDeo.length;
