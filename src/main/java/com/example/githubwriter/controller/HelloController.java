@@ -48,7 +48,7 @@ public class HelloController {
             String encoded = Base64.getEncoder().encodeToString(content.getBytes());
 
             // URL API GitHub
-            String url = "https://api.github.com/repos/" + repo + "/contents/data.txt";
+            String url = "https://api.github.com/repos/" + user + "/" + repo + "/contents/data.txt";
 
 
             // JSON payload
