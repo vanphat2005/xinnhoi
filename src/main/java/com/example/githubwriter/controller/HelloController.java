@@ -15,14 +15,15 @@ import java.util.Base64;
 @Controller
 public class HelloController {
 
-    @Value("${github.token}")
+    @Value("${GITHUB_TOKEN}")
     private String token;
 
-    @Value("${github.repo}")
+    @Value("${GITHUB_REPO}")
     private String repo;
 
-    @Value("${github.user}")
+    @Value("${GITHUB_USER}")
     private String user;
+
 
     /**
      * Hiển thị trang HTML chính (http://localhost:8080/hello)
