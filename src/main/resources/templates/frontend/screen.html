@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,13 +18,12 @@
         h1 {
             color: #d63384;
             margin: 40px 15px 20px;
-            font-size: clamp(1.8em, 5vw, 2.5em); /* co giãn theo màn hình */
+            font-size: clamp(1.8em, 5vw, 2.5em);
         }
 
         p {
-            font-size: clamp(1em, 3.5vw, 1.3em);
-            color: #444;
-            margin: 0 20px 25px;
+            font-size: clamp(1em, 3.5vw, 1.2em);
+            margin-bottom: 20px;
         }
 
         .btn {
@@ -36,11 +35,20 @@
             font-size: 1.1em;
             cursor: pointer;
             transition: all 0.3s ease;
+            margin: 10px;
         }
 
         .btn:hover {
             background-color: #ff3385;
-            transform: scale(1.07);
+            transform: scale(1.05);
+        }
+
+        #btnDa {
+            font-size: 1.2em;
+        }
+
+        #btnDeo {
+            background-color: #444;
         }
 
         img {
@@ -61,22 +69,47 @@
 </head>
 <body>
 <h1>Xin chào Boss 💖</h1>
-<p>Đây là web chạy bằng Spring Boot với tone hồng ngọt ngào 🍓</p>
+<p>Chọn khôn ngoan đi nè 🍓</p>
 
-<button class="btn" onclick="sendClick()">Nhấn em đi 💗</button>
+<button id="btnDa" class="btn" onclick="sayYes()">Dạ 💗</button>
+<button id="btnDeo" class="btn" onclick="sayNo()">Đéo 😏</button>
 
-<img src="https://i.imgur.com/xQXvO0h.jpeg" alt="Ảnh hồng xinh">
+<!-- Ảnh hiển thị -->
+<img src="/images/pink.jpg" alt="Ảnh hồng xinh">
+<!-- nếu muốn dùng ảnh online thì đổi src thành https://i.imgur.com/xQXvO0h.jpeg -->
 
 <footer>
     <p>Made with 💗 by Boss</p>
 </footer>
 
 <script>
-    function sendClick() {
-        fetch('/click', { method: 'POST' })
-            .then(res => res.text())
-            .then(msg => alert(msg))
-            .catch(err => alert('Lỗi: ' + err));
+    let noClickCount = 0;
+
+    function sayYes() {
+        alert("Boss chọn 'Dạ' rồi 💕");
+    }
+
+    function sayNo() {
+        noClickCount++;
+
+        const btnDa = document.getElementById("btnDa");
+        const btnDeo = document.getElementById("btnDeo");
+
+        // Tăng size nút Dạ
+        let newSizeDa = 1.2 + noClickCount * 0.2;
+        btnDa.style.transform = `scale(${newSizeDa})`;
+
+        // Giảm size nút Đéo
+        let newSizeDeo = 1 - noClickCount * 0.15;
+        if (newSizeDeo > 0) {
+            btnDeo.style.transform = `scale(${newSizeDeo})`;
+        }
+
+        // Sau 5 lần thì xóa nút Đéo
+        if (noClickCount >= 5) {
+            btnDeo.remove();
+            alert("Nút 'Đéo' đã biến mất, chỉ còn 'Dạ' thôi Boss 😆");
+        }
     }
 </script>
 </body>
