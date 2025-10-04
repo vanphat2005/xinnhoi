@@ -23,7 +23,17 @@
 
         p {
             font-size: clamp(1em, 3.5vw, 1.2em);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+        }
+
+        img {
+            width: min(80%, 280px);
+            height: auto;
+            margin: 10px auto 25px;
+            border-radius: 20px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+            display: block;
+            transition: all 0.3s ease;
         }
 
         .btn {
@@ -43,21 +53,8 @@
             transform: scale(1.05);
         }
 
-        #btnDa {
-            font-size: 1.2em;
-        }
-
         #btnDeo {
             background-color: #444;
-        }
-
-        img {
-            width: min(80%, 280px);
-            height: auto;
-            margin: 25px auto;
-            border-radius: 20px;
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
-            display: block;
         }
 
         footer {
@@ -71,12 +68,12 @@
 <h1>Xin chào Boss 💖</h1>
 <p>Chọn khôn ngoan đi nè 🍓</p>
 
+<!-- Ảnh nằm trên nút -->
+<img id="mainImg" src="https://i.imgur.com/xQXvO0h.jpeg" alt="Ảnh hồng xinh">
+
+<!-- Nút bấm -->
 <button id="btnDa" class="btn" onclick="sayYes()">Dạ 💗</button>
 <button id="btnDeo" class="btn" onclick="sayNo()">Đéo 😏</button>
-
-<!-- Ảnh hiển thị -->
-<img src="/images/pink.jpg" alt="Ảnh hồng xinh">
-<!-- nếu muốn dùng ảnh online thì đổi src thành https://i.imgur.com/xQXvO0h.jpeg -->
 
 <footer>
     <p>Made with 💗 by Boss</p>
@@ -85,8 +82,28 @@
 <script>
     let noClickCount = 0;
 
+    const imgEl = document.getElementById("mainImg");
+
+    // Danh sách ảnh cho mỗi nút
+    const imgDa = [
+        "https://i.imgur.com/xQXvO0h.jpeg",
+        "https://i.imgur.com/NK0Ck9q.jpeg",
+        "https://i.imgur.com/oZ9xVJk.jpeg"
+    ];
+
+    const imgDeo = [
+        "https://i.imgur.com/rS0TjXa.jpeg",
+        "https://i.imgur.com/t8V0A8D.jpeg",
+        "https://i.imgur.com/zF8jKfG.jpeg"
+    ];
+
+    let indexDa = 0;
+    let indexDeo = 0;
+
     function sayYes() {
-        alert("Boss chọn 'Dạ' rồi 💕");
+        // đổi ảnh khi bấm nút Dạ
+        indexDa = (indexDa + 1) % imgDa.length;
+        imgEl.src = imgDa[indexDa];
     }
 
     function sayNo() {
@@ -95,20 +112,23 @@
         const btnDa = document.getElementById("btnDa");
         const btnDeo = document.getElementById("btnDeo");
 
-        // Tăng size nút Dạ
+        // đổi ảnh khi bấm nút Đéo
+        indexDeo = (indexDeo + 1) % imgDeo.length;
+        imgEl.src = imgDeo[indexDeo];
+
+        // tăng size nút Dạ
         let newSizeDa = 1.2 + noClickCount * 0.2;
         btnDa.style.transform = `scale(${newSizeDa})`;
 
-        // Giảm size nút Đéo
+        // giảm size nút Đéo
         let newSizeDeo = 1 - noClickCount * 0.15;
         if (newSizeDeo > 0) {
             btnDeo.style.transform = `scale(${newSizeDeo})`;
         }
 
-        // Sau 5 lần thì xóa nút Đéo
+        // sau 5 lần thì xóa nút Đéo
         if (noClickCount >= 5) {
             btnDeo.remove();
-            alert("Nút 'Đéo' đã biến mất, chỉ còn 'Dạ' thôi Boss 😆");
         }
     }
 </script>
